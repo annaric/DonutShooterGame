@@ -4,30 +4,29 @@ using UnityEngine;
 
 public class PickItem : MonoBehaviour
 {
-    public GameObject fruit;
-    bool hasAlreadyItem;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float distanceToCollect = 4.0f;
+    public string itemTag = "PickableItem";
+    public KeyCode collectKey = KeyCode.E;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(collectKey))
+        {
+            CollectItems();
+        }
     }
 
-     private void OnTriggerStay(Collider other)
+    void CollectItems()
     {
-        if(other.tag == "PickableItem"  && !hasAlreadyItem)
+        GameObject[] items = GameObject.FindGameObjectsWithTag(itemTag);
+        foreach (GameObject item in items)
+        {
+            if (Vector3.Distance(transform.position, item.transform.position) <= distanceToCollect)
             {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    //other.transform.SetParent(this);
-                }
-                
+                Destroy(item);
+                Counter.instance.counter++;
+                Debug.Log(Counter.instance.counter);
             }
-
+        }
     }
 }

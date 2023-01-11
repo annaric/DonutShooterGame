@@ -10,8 +10,7 @@ public class PlayerShooting : MonoBehaviour
     public Camera mainCamera;
     public float fireRate;
     public float delay;
-    public float bulletSpeed;
-
+    public int bulletSpeed = 2000;
     private float nextFire;
 
     private void Start()
@@ -28,7 +27,8 @@ public class PlayerShooting : MonoBehaviour
             // Aim the shotSpawn object at the middle of the screen
             Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2));
             shotSpawn.LookAt(ray.origin + ray.direction * 10);
-            weapon.LookAt(ray.origin + ray.direction * 10);
+            weapon.LookAt((ray.origin + ray.direction * 10));
+            weapon.Rotate(new Vector3(0, 90, 0));
 
             Fire();
         }
@@ -36,7 +36,12 @@ public class PlayerShooting : MonoBehaviour
 
     void Fire()
     {
-        GameObject bullet = Instantiate(projectile, shotSpawn.position, shotSpawn.rotation) as GameObject;
-        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed);
+        if(Counter.instance.counter > 0) {
+            GameObject bullet = Instantiate(projectile, shotSpawn.position, shotSpawn.rotation) as GameObject;
+            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed);
+            Counter.instance.counter--;
+        }
+        Debug.Log(Counter.instance.counter);
+        
     }
 }
