@@ -6,6 +6,9 @@ public class FruitFallTrigger : MonoBehaviour
 {
     bool hasAlreadyRig = false;
     public GameObject fruits;
+    public GameObject tree;
+    public GameObject fruitPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +23,20 @@ public class FruitFallTrigger : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player" && !hasAlreadyRig)
+        if(other.tag == "Player")
             {
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && !hasAlreadyRig)
                 {
                     foreach (Transform child in fruits.transform)
                         child.gameObject.AddComponent<Rigidbody>();
                     hasAlreadyRig = true;  
                 }
+                //if (Input.GetKeyDown(KeyCode.F) && hasAlreadyRig)
+                //{
+                    //GameObject newFruits = Instantiate(fruitPrefab, new Vector3(0,0,0), Quaternion.identity);
+                    //newFruits.transform.parent = tree.transform;
+                    //hasAlreadyRig = false;  
+                //}
                 
             }
 

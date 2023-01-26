@@ -36,12 +36,12 @@ public class PlayerShooting : MonoBehaviour
 
     void Fire()
     {
-        if(Counter.instance.counter > 0) {
+        if(Counter.instance.counter > 0 && LifeCounter.lifeCounterInstance.lifeCounter > 0 ) {
             GameObject bullet = Instantiate(projectile, shotSpawn.position, shotSpawn.rotation) as GameObject;
+            bullet.AddComponent<DestroyWhenNotUsed>();
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletSpeed);
             Counter.instance.counter--;
         }
-        Debug.Log(Counter.instance.counter);
         
     }
 }
