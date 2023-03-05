@@ -69,7 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13588228958402546b25fb2fa082a807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeCounterText: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -83,7 +82,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 856e50dd98cab3d4dbeb52ed8aac03a9, type: 3}
   - {fileID: 8300000, guid: c3a394c0f0c3ace4c809b4bde6f30680, type: 3}
   walkRange: 100
-  sightRange: 10
+  sightRange: 20
   touchRange: 1
 --- !u!82 &6624777673026358953
 AudioSource:
